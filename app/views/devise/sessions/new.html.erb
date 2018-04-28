@@ -1,0 +1,39 @@
+<div class="bodyyy">
+<div class="login-wrap" style="opacity: 0.9;">
+    <div class="login-html">
+      
+        <h1 style="color: white;">Sign In</h1>
+        <br>
+        <br>
+          
+          <div class="login-form">
+             <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { role: 'form' }) do |f| %>
+             <div class="group">
+             <%= f.label :email %>
+             <%= f.email_field :email, autofocus: true, class: 'input' %>
+             </div>
+             <div class="group">
+             <%= f.label :password %>
+             <%= f.password_field :password, autocomplete: 'off', class: 'input' %>
+             </div>
+             <% if devise_mapping.rememberable? %>
+             <div class="checkbox" style="color: white;">
+             <%= f.label :remember_me do %>
+             <%= f.check_box :remember_me %> <%= t('.remember_me', default: 'Remember me') %>
+             <% end %>
+             </div>
+             <% end %>
+             <br>
+             <div class="group">
+             <%= f.submit  t('.sign_in', default: 'Sign in'), class: 'button' %>
+             </div>
+            <% end %>
+          </div>
+
+          <div class="foot-lnk">
+          <label for="tab-1"><%= render 'devise/shared/links' %></a>
+        </div>
+    </div>
+</div>
+</div>
+

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  <style type="text/css">
+
+
+  body{
+    /*background-image: url("/uploads/images/pro.jpeg");
+     background-repeat: no-repeat;
+        background-size:cover;
+        background-attachment: fixed;*/
+     background-color: #18bc9c;
+
+  }
+    
+
+    .tab{
+      border-style: solid;
+      border-color: #C8C8C8;
+      border-width: 1px;
+      border-radius: 25px;
+      width: 800px;
+      height: 70px;
+      margin-left: 250px;
+      padding: 15px;
+      padding-left: 30px;
+    }
+    .tab:hover{
+      background-color: #2c3e50;
+      border-color: green;
+      color:white;
+      border-color: white;
+      box-shadow: 10px 10px 5px black;
+
+    }
+    
+
+    .tag{
+      font: 400 25px/1.8 "Lato", sans-serif;
+      font-weight: bold;
+      float: left;
+      padding-left: 30px;
+      padding-top: 0px;
+    }
+    
+    .content{
+      width: 500px;
+      height: 40px;
+      font-size: 20px;
+      color: coral;
+
+
+    }
+
+    .browse{
+      padding-left: 30px;
+      width: 600px;
+      height: 50px;
+      font-size: 25px;
+
+    }
+    .actions{
+      border-style: solid;
+      border-color: #f9c509; 
+      border-width: 2px;
+      width: 204px;
+      margin-left: 550px;
+      
+    }
+    
+
+  </style>
+</head>
+
+<body>
+<br>
+<br>
+<br>
+<br>
+
+<br>
+<br>
+<br>
+<%= form_for @account, html: { multipart: true } do |f| %>
+  <% if @account.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@account.errors.count, "error") %> prohibited this account from being saved:</h2>
+
+      <ul>
+      <% @account.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="tab">
+  
+    <%= f.label :firstname, class: 'tag' %> &nbsp &nbsp&nbsp
+     <%= f.text_field :firstname,  class: 'content', placeholder: 'Your name..',:required => true %>
+  </div>
+  <br>
+  <div class="tab">
+  
+    <%= f.label :lastname , class: 'tag' %> &nbsp &nbsp&nbsp
+    <%= f.text_field :lastname,  class: 'content', placeholder: 'Last name..',:required => true %>
+  </div>
+  <br>
+  <div class="tab">
+  
+  <%= f.label :dob , class: 'tag' %> &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    <%= f.text_field :dob,  class: 'content', placeholder: 'Date Of Birth..',:required => true %>
+  </div>
+  <br>
+  <div class="tab">
+  
+    <%= f.label :phone , class: 'tag' %> &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    <%= f.number_field :phone,  class: 'content', placeholder: 'Phone No...',:required => true %>
+  </div>
+  <br>
+  <div class="tab">
+  
+    <%= f.label :profilepic , class: 'tag' %>
+    <%= f.file_field :profilepic,  class: 'browse',:required => true %>
+  </div>
+  <br>
+ 
+  <div class="actions">
+    <%= f.submit style: 'color: black; width:200px; height:40px;' %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  
+  var yo = document.getElementsByClassName('tab');
+  
+  for (var i =0; i<yo.length; i++ ) {
+     yo[i].onclick = function(){
+       
+        this.style.backgroundColor = "#2c3e50";
+        this.style.color = "white";
+        this.style.borderColor = "white";
+        this.style.boxShadow = "10px 10px 5px black";
+
+  }  
+  }
+
+</script>
+</body>
+</html>

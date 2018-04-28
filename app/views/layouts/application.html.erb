@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Reviewsite</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel= "stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+<% if notice %>
+<script type="text/javascript">
+	noty({text: '<%= notice %>',
+       layout: 'topRight',
+  theme: 'metroui',
+  type: 'warning', 
+
+  timeout: 1000,
+  progressBar: false,
+
+  animation: {
+    open: 'animated rubberBand', // Animate.css class names
+    close: 'animated bounceOutRight' // Animate.css class names
+ 
+  }
+
+ 
+                
+     });
+</script>
+
+<% end %>
+
+
+<% if alert %>
+
+<script type="text/javascript">
+	noty({text: '<%= alert %>',
+	  layout: 'topRight',
+       theme: 'metroui',
+       type: 'alert', 
+
+       timeout: 1000,
+       progressBar: false,
+
+       animation: {
+          open: 'animated rubberBand', // Animate.css class names
+          close: 'animated bounceOutRight'// Animate.css class names
+ 
+       }
+
+        });
+</script>
+<% end %>
+
+<% if user_signed_in? %>
+<%= render 'uploads/navbar'  %>
+<%end%>
+<%= yield %>
+
+</body>
+</html>

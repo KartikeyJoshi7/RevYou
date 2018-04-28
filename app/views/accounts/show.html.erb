@@ -1,0 +1,39 @@
+<br>
+<br>
+<br>
+
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Firstname:</strong>
+  <%= @account.firstname %>
+</p>
+
+<p>
+  <strong>Lastname:</strong>
+  <%= @account.lastname %>
+</p>
+
+<p>
+  <strong>Dob:</strong>
+  <%= @account.dob %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @account.phone %>
+</p>
+
+<p>
+  <strong>Profilepic:</strong>
+  <%= @account.profilepic %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @account.user %>
+</p>
+
+<%= link_to 'Edit', edit_account_path(@account) %> |
+<%= link_to 'Back', accounts_path %>

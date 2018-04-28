@@ -1,0 +1,175 @@
+<html>
+<head>
+ <link rel="stylesheet" type="text/css" href="/home/kartikey/Desktop/project/reviewransack/app/assets/stylesheets/uploads_index.css">
+
+</head>
+<body>
+
+<div style=" margin-left: 150px;width: 1000px; height: 100px; border-style: solid;
+    border-width: 3px;">
+    <h1 style="opacity: 0.5;"> What's on your mind !!</h1>
+  
+</div>
+<!-- Trigger/Open The Modal -->
+<button id="myBtn" style="margin-left:150px; width: 1000px; height: 60px; color: blue;">New Upload</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+      <h2>Modal Header</h2>
+    </div>
+  <%= render template: "uploads/new", upload: @upload%>
+  </div>
+
+</div>
+
+
+
+<br>
+<br>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @uploads.each do |upload| %>
+      <div style="border-style: solid; background-color: white;
+    border-width: 3px; width: 515px; margin-left: 400px; padding: 5px;"  >
+      <div >
+        <h5 style="color: red;"><%= upload.user.username %></h5>
+        <br>
+        <br>
+        <div class = "king">
+        <%if upload.avatar_url.split('.')[1] == "jpg"%>
+        <img id="myimg" src = "<%= upload.avatar_url %>" style = "width: 500px; height: 300px;" >
+        <%elsif upload.avatar_url.split('.')[1] == "mp4"%>
+        <video id="myimg" src = "<%= upload.avatar_url %>" controls style = "width: 500px; height: 300px;" type = "video/mp4" ></video>
+        <%elsif upload.avatar_url.split('.')[1] == "mp3"%>          
+        <audio id="myimg" controls>
+        <source  src= "<%= upload.avatar_url %>" type="audio/mpeg">
+        </audio>
+        <%end%>
+      </div>
+      
+      <br>
+      <br>
+
+      
+      Rating  : <%= rating_for upload, 'rating', star: 10 %>
+      
+      <div class="rating">
+      <% @rates.each do |rate| %>
+       <% if rate.rateable_id == upload.id%>
+       <% @users.each do |user|%>
+         <% if user.id == rate.rater_id %>
+          
+          <%= user.username%>
+        <%=rating_for_user upload, user, 'rating', star: 10%>       
+
+          <br>
+           
+         <%end%>
+         
+       <%end%> 
+
+       <%end%>
+       <%end%>
+       </div>
+       
+       </div>
+       <!-- king ends here -->
+      <% if current_user.id == upload.user_id %> 
+       <pre> <%= link_to 'Edit', edit_upload_path(upload) %>   <%= link_to 'Destroy', upload, method: :delete, data: { confirm: 'Are you sure?' } %></pre>
+        <%end%>
+        </div>
+       </div>
+
+        <br>
+       
+       <div class="parent" id="big">
+          <span class="closer">&times;</span>
+          <img class="image-content" id="img01"><h3>hi</h3>
+          <div id="stars"></div>
+       </div>
+       
+
+
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+
+
+<script>
+
+var bigdiv = document.getElementById('big');
+var final = document.getElementById("stars");
+var kinger = document.getElementsByClassName("king");
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var childimg = document.getElementsByClassName('myimg');
+var childstars = document.getElementsByClassName("rating");
+console.log(childstars[0].innerHTML);
+
+console.log(childimg[0]);
+console.log(childimg[1]);
+
+var yoimg = document.getElementById("img01");
+
+for (var j = 0; j < king.length; j++) {
+
+king[j].onclick = function(){
+    bigdiv.style.display = "block";
+    yoimg.src = this.img.myimg.src;
+
+//childstars.style.display = "block";
+final.innerHTML =childstars[4].innerHTML; 
+}
+}
+var span = document.getElementsByClassName("closer")[0];
+
+// Get the <span> element that closes the modal
+
+
+
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+    modal.style.display = "block";
+    console.log("bfjlbsh")
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+
+</body>
+</html>
+

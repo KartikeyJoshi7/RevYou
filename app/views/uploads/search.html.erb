@@ -1,0 +1,70 @@
+   <!DOCTYPE html>
+   <html>
+   <head>
+   	
+   <style type="text/css">
+     
+     .search{
+     	border-style: solid;
+     	border-color: #2c3e50;
+     	margin-left: 450px;
+     	padding-top: 30px;
+
+     	padding: 50px;
+     	padding-left: 50px;
+     	width: 400px;
+     	height: 200px;
+     	border-radius: 5px;
+     	border-width: 2px;
+     	border-top-width:20px; 
+     	border-bottom-width: 20px;
+     	font-size: 30px;
+     	font-weight: bolder;
+     }  	
+
+   </style>
+
+
+   </head>
+   
+
+   <body>
+   <br>
+   <br>
+   <br>   
+   
+   <h1 style="color: white; font-weight: bolder; background-color: #18bc9c; height: 60px; padding-top: 10px;">Search Results!!</h1>
+
+    <% @users.each do |yo| %>
+    <%@yo=yo%>
+
+
+    <div class="search">
+
+        <div  style="float: left;">
+ 
+          <%x=0%>
+           <%@accounts.each do |acc|%>
+             <%if @yo.id == acc.user_id%>
+                <img src = "<%=acc.profilepic_url%>" style="width: 70px; height: 70px;border-radius: 35px; float: left;">
+          <%x=1%>  
+              <%break%>
+          <%end%>
+          <%end%>
+          <%if x!=1%> 
+            <img src = "/default/defaultpic.jpg" style="width: 70px; height: 70px;  border-radius: 35px; float: left;">
+          <%end%> 
+     </div>
+     <div style="height: 10px;"></div>
+    <div data-turbolinks="false">
+    <%= link_to @yo.username, user_path(@yo), style: 'color: #18bc9c; text-transform:capitalize; padding-left:20px;', remote: true %>
+    </div>
+
+ <%=render '/follows/follow_button_search',yo: @yo%>
+    </div>
+    <hr>
+    
+    <%end%>
+
+   </body>
+   </html>

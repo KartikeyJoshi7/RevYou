@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @upload.user.username %>
+</p>
+
+
+<%if @upload.avatar_url.split('.')[1] == "jpg"%>
+        <img src = "<%= @upload.avatar_url %>" style = "width: 400px; height: 400px;" >
+        <%elsif @upload.avatar_url.split('.')[1] == "mp4"%>
+        <video src = "<%= @upload.avatar_url %>" controls style = "width: 400px; height: 400px;" type = "video/mp4" ></video>
+
+        <%elsif @upload.avatar_url.split('.')[1] == "mp3"%>          
+        <audio controls>
+        <source src= "<%= @upload.avatar_url %>" type="audio/mpeg">
+        </audio>
+        <%end%>
+<%= link_to 'Edit', edit_upload_path(@upload) %> 
+<%= link_to 'Back', uploads_path %>

@@ -1,0 +1,29 @@
+<div id="search_follow">
+    <% if current_user.id != @yo.id%>
+
+<div>
+
+<%y=0%>
+  
+  <% @follows.each do |follow|%>
+    <%if ((current_user.id == follow.user_id) && (@yo.id == follow.follower))%>
+    
+      <%=link_to 'Unfollow', follows_unmappingsearch_path(:id=>@yo.id), style:'color:white; font-size:15px;font-weight:bold;margin-left:20px;
+         margin-top:0px; border-style:solid; border-width:2px; border-radius:5px; padding:10px; background-color: #2c3e50; width:90px; float:left; text-decoration:none;', remote: true%> 
+    
+         <%y=1%> 
+         <%break%>
+      <%end%>
+
+  <%end%>
+
+
+<% if y == 0%>
+  
+ <%=link_to 'Follow', follows_mappingsearch_path(:id=>@yo.id), style: 'color:white; font-size:15px; font-weight:bold;  margin-left:20px;
+ margin-top:0px; border-style:solid; border-width:2px; border-radius:5px; padding:10px; background-color: #2c3e50;  width:70px; float:left; text-decoration:none;',remote: true%> 
+<%end%>
+</div>
+
+<%end%>
+</div>

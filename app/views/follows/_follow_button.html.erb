@@ -1,0 +1,116 @@
+<div id="follow_button">
+<% if current_user.id != @user.id%>
+<div style="height: 5px;"></div>
+<div>
+
+<%y=0%>
+  
+  <% @follows.each do |follow|%>
+    
+    <%if ((current_user.id == follow.user_id) && (@user.id == follow.follower))%>
+
+      <%=link_to 'Unfollow', follows_unmapping_path(:id=>@user.id), style:'color:white; font-size:15px;font-weight:bold;margin-left:10px;
+         margin-top:0px; border-style:solid; border-width:2px; border-radius:5px; padding:10px; background-color: #2c3e50; width:90px; float:left;', remote: true%> 
+    
+         <%y=1%> 
+         <%break%>
+      <%end%>
+
+  <%end%>
+
+
+<% if y == 0%>
+  
+ <%=link_to 'Follow', follows_mapping_path(:id=>@user.id), style: 'color:white; font-size:15px; font-weight:bold;  margin-left:10px;
+ margin-top:0px; border-style:solid; border-width:2px; border-radius:5px; padding:9px; background-color: #2c3e50;  width:70px; float:left;', remote: true%> 
+<%end%>
+</div>
+
+
+<%else%>
+<br>
+<%end%>
+
+
+
+
+<div class="container">
+  <!-- Trigger the modal with a button -->
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style=" background-color: #2c3e50; color: white; margin-left:5px;margin-top:0px; border-style:solid; border-width:2px; border-radius:5px; font-size: 15px; border-color: white; font-weight: bold;">Following <%=Follow.where(:user_id => @user.id).count%></button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="color: white;background-color: #2c3e50; ">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h2 class="modal-title" style="font-weight: bold;">Following</h2>
+        </div>
+          <br>
+        <div class="modal-body" style="color: #2c3e50; font-size: 30px; text-transform: capitalize; font-weight: bold; ">
+           <%@follows.each do |follow|%>
+            <%if @user.id == follow.user_id%>
+             <% @users.each do |user|%>
+              <%if user.id == follow.follower%>
+               <%= user.username%>
+               <br>
+              <%end%>
+              <%end%>
+            <%end%>
+            
+             <%end%>    
+        </div>
+       <br>
+      </div>
+      
+    </div>
+  </div>
+  
+
+
+<button type="button" id= "myBtny" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModaly" style=" background-color: #2c3e50; color: white; margin-top:0px; border-style:solid; border-width:2px; border-radius:5px; border-color: white; font-size: 15px; font-weight: bold;">Followers <%=Follow.where(:follower => @user.id).count%></button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModaly" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="color: white;background-color: #2c3e50; ">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h2 class="modal-title" style="font-weight: bold;">Following</h2>
+        </div>
+          <br>
+        <div class="modal-body" style="color: #2c3e50; font-size: 30px; text-transform: capitalize; font-weight: bold; ">
+           <%@follows.each do |follow|%>
+            <%if @user.id == follow.follower%>
+            <%one = follow.user_id%>
+             <% @users.each do |user|%>
+              <%if user.id == one%>
+               <%= user.username%>
+               <br>
+              <%end%>
+              <%end%>
+            <%end%>
+            
+             <%end%>    
+        </div>
+       <br>
+      </div>
+      
+    </div>
+  </div>
+
+
+
+  
+</div>
+
+
+
+</div>
+
+
+</div>

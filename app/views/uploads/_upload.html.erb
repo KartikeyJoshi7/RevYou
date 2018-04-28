@@ -1,0 +1,22 @@
+<div id="rating_ajax">
+      <div class="rating" style="margin-left: 80px; margin-top: 0px;width: 360px; height: 300px; overflow: scroll; padding: 5px; float: left;">
+            <% @rates.each do |rate| %>
+       <% if rate.rateable_id == @upload.id%>
+       <% @users.each do |user|%>
+         <% if user.id == rate.rater_id %>
+         <div class="readonly-star">
+        <pre style=" border-radius: 20px; color: black; font-size: 15px; width: 300px; text-transform: capitalize;"><%= user.username%><%=rating_for_user @upload, user, 'rating', star: 10%></pre>
+          
+         </div> 
+            
+         <%end%>
+         
+       <%end%> 
+
+       <%end%>
+
+
+
+       <%end%>
+       </div>
+</div>

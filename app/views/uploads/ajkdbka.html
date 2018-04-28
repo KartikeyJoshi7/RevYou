@@ -1,0 +1,279 @@
+<html>
+<head>
+<style>
+/*<div id="myzoomer" class="zoomer">
+<span class="close" >&times;</span>
+<img class="zoomer-content" id="zoomer01">
+<div>*/
+/* The Modal (background) */
+body{
+  background-color: #e9ebee;
+}
+
+#myimg{
+  border-radius: 5px;
+    cursor: pointer;
+}
+
+.zoomer{
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+.zoomer-content{
+  margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+    from {-webkit-transform:scale(0)} 
+    to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+    from {transform:scale(0)} 
+    to {transform:scale(1)}
+}
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+</style>
+</head>
+<body>
+
+<div style=" margin-left: 150px;width: 1000px; height: 100px; border-style: solid;
+    border-width: 3px;">
+    <h1 style="opacity: 0.5;"> What's on your mind !!</h1>
+  
+</div>
+<!-- Trigger/Open The Modal -->
+<button id="myBtn" style="margin-left:150px; width: 1000px; height: 60px; color: blue;">New Upload</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+      <h2>Modal Header</h2>
+    </div>
+  <%= render template: "uploads/new", upload: @upload%>
+  </div>
+
+</div>
+
+
+<script>
+/*<div id="myzoomer" class="zoomer">
+<span class="close" >&times;</span>
+<img class="zoomer-content" id="zoomer01">
+<div>*/
+/* The Modal (background) */
+var one=document.getElementById('one');
+console.log(one);
+var zoomer=document.getElementById('myzoomer');
+console.log(zoomer);
+var img=document.getElementById("myimg");
+var zoomerimg=document.getElementById("zoomer01");
+
+img.onclick=function(){
+    
+    zoomer.style.display="block";
+    zoomerimg.src=this.src;
+
+
+}
+
+  var span = document.getElementsByClassName("close")[0];
+span.onclick = function() { 
+    zoomer.style.display = "none";
+}
+
+
+
+
+
+
+
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+    modal.style.display = "block";
+    console.log("bfjlbsh")
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+
+<br>
+<br>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @uploads.each do |upload| %>
+      <div style="border-style: solid; background-color: white;
+    border-width: 3px; width: 515px; margin-left: 400px; padding: 5px;"  >
+      <div >
+        <h5 style="color: red;"><%= upload.user.username %></h5>
+        <br>
+        <br>
+        
+        <%if upload.avatar_url.split('.')[1] == "jpg"%>
+        <img id="myimg" src = "<%= upload.avatar_url %>" style = "width: 500px; height: 300px;" >
+        <%elsif upload.avatar_url.split('.')[1] == "mp4"%>
+        <video id="myimg" src = "<%= upload.avatar_url %>" controls style = "width: 500px; height: 300px;" type = "video/mp4" ></video>
+        <%elsif upload.avatar_url.split('.')[1] == "mp3"%>          
+        <audio id="myimg" controls>
+        <source  src= "<%= upload.avatar_url %>" type="audio/mpeg">
+        </audio>
+        <%end%>
+      </div>
+      
+      <br>
+      <br>
+
+      <div id="one"></div>
+      Rating  : <%= rating_for upload, 'rating', star: 10 %>
+      
+
+      <% @rates.each do |rate| %>
+       <% if rate.rateable_id == upload.id%>
+       <% @users.each do |user|%>
+         <% if user.id == rate.rater_id %>
+          <%= user.username%>
+          <%=rating_for_user upload, user, 'rating', star: 10%>
+          <br>
+           
+         <%end%>
+         
+       <%end%> 
+
+       <%end%>
+       <%end%>
+
+
+      <% if current_user.id == upload.user_id %> 
+       <pre> <%= link_to 'Edit', edit_upload_path(upload) %>   <%= link_to 'Destroy', upload, method: :delete, data: { confirm: 'Are you sure?' } %></pre>
+        <%end%>
+        </div>
+        <br>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<div id="myzoomer" class="zoomer">
+<span class="close" >&times;</span>
+<img class="zoomer-content" id="zoomer01">
+<div>
+
+</body>
+</html>
+
